@@ -10,6 +10,8 @@
     "bourbon": "^4.2.6",
     "bourbon-neat": "^1.7.2",
     "css-loader": "^0.20.2",
+    "eslint": "^1.7.3",
+    "eslint-plugin-react": "^3.6.3",
     "foundation-sites": "^5.5.3",
     "gulp": "^3.8.11",
     "gulp-gh-pages": "^0.5.2",
