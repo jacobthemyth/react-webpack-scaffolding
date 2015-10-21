@@ -57,7 +57,10 @@ var webpackConfig = {
       {
         test: /\.scss$/,
         loader: "style-loader!css-loader!sass-loader?outputStyle=expanded&" + scssIncludeParams,
-        include: path.resolve(__dirname, 'app', 'styles')
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
       }
     ]
   }
