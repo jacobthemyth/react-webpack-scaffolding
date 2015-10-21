@@ -7,6 +7,7 @@ var path              = require('path');
 var webpack           = require('webpack');
 var HtmlPlugin        = require('html-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+var ModernizrPlugin   = require('modernizr-webpack-plugin');
 var WebpackDevServer  = require('webpack-dev-server');
 
 var param             = require('jquery-param');
@@ -34,6 +35,7 @@ var webpackConfig = {
   },
 
   plugins: [
+    new ModernizrPlugin({}),
     new HtmlPlugin({
       template: 'app/index.html',
       inject: false
