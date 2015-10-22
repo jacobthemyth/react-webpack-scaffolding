@@ -44,7 +44,7 @@ var webpackConfig = {
 
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss'],
-    modulesDirectories: ['app', 'web_modules', 'node_modules']
+    modulesDirectories: ['app', 'public', 'node_modules']
   },
 
   module: {
@@ -61,6 +61,15 @@ var webpackConfig = {
       {
         test: /\.css$/,
         loader: "style-loader!css-loader"
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'url?name=images/[name].[ext]&limit=8192',
+        include: path.resolve(__dirname, 'public', 'assets', 'images')
+      },
+      {
+        test: /fonts?\/.*\.(eot|ttf|woff|svg|svgz)$/,
+        loader: 'url?name=fonts/[name].[ext]'
       }
     ]
   }

@@ -1,6 +1,6 @@
 # react-webpack-scaffolding
 
-#### How to get started
+## How to get started
 
 1. Start your own project folder with a git clone then git init
 
@@ -26,6 +26,36 @@
     gulp
     ```
 
-#### License
+## Usage
+
+### Images
+
+Images should be placed in `public/assets/images`
+
+#### In JS / JSX
+
+```jsx
+import mountains from 'assets/images/mountains.jpeg';
+
+var Thing = React.createClass({
+  render() {
+    return (
+      <img src={mountains} alt="Mountains" />
+    );
+  }
+});
+```
+
+#### In SCSS
+
+URLs are relative to `app.scss`
+
+```scss
+body {
+  background-image: url('../../public/assets/images/mountains.jpeg');
+}
+```
+
+## License
 
 MIT.
