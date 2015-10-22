@@ -16,7 +16,7 @@ var scssIncludePaths = {
   includePaths: [
     './node_modules/foundation-sites/scss/',
     './node_modules/bourbon/app/assets/stylesheets/',
-    './node_modules/bourbon-neat/app/assets/stylesheets/',
+    './node_modules/bourbon-neat/app/assets/stylesheets/'
   ]
 };
 var scssIncludeParams = decodeURIComponent(param(scssIncludePaths));
@@ -30,8 +30,7 @@ var webpackConfig = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-bundle.js',
-    publicPath: '/'
+    filename: '[name]-bundle.js'
   },
 
   plugins: [
@@ -56,11 +55,11 @@ var webpackConfig = {
       },
       {
         test: /\.scss$/,
-        loader: "style-loader!css-loader!sass-loader?outputStyle=expanded&" + scssIncludeParams,
+        loader: "style!css?sourceMap!sass?sourceMap&outputStyle=expanded&" + scssIncludeParams,
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loader: "style!css?sourceMap"
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -68,8 +67,24 @@ var webpackConfig = {
         include: path.resolve(__dirname, 'public', 'assets', 'images')
       },
       {
-        test: /fonts?\/.*\.(eot|ttf|woff|svg|svgz)$/,
-        loader: 'url?name=fonts/[name].[ext]'
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
       }
     ]
   }
@@ -84,6 +99,7 @@ gulp.task("webpack:dev", function(callback) {
   devConfig.entry.app.unshift('webpack-dev-server/client?http://localhost:' + webpackPort);
   devConfig.devtool = "sourcemap";
   devConfig.debug = true;
+  devConfig.output.publicPath = "http://localhost:" + webpackPort + "/";
   devConfig.plugins = devConfig.plugins.concat(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
