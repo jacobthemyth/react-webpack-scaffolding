@@ -66,7 +66,7 @@ var webpackConfig = {
   }
 };
 
-var webpackPort = 3000;
+var webpackPort = process.env.PORT || 3000;
 gulp.task("webpack:dev", function(callback) {
   // modify some webpack config options
   var devConfig = Object.create(webpackConfig);
