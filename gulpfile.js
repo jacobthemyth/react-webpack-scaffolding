@@ -25,12 +25,13 @@ var webpackConfig = {
   context: path.resolve(__dirname, 'app'),
   entry: {
     app: ['./app.js'],
-    head: ['./head.js'],
+    styles: ['./styles/app.scss'],
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-bundle.js'
+    filename: '[name]-bundle.js',
+    publicPath: './'
   },
 
   plugins: [
@@ -55,7 +56,7 @@ var webpackConfig = {
       },
       {
         test: /\.scss$/,
-        loader: "style!css?sourceMap!sass?sourceMap&outputStyle=expanded&" + scssIncludeParams,
+        loader: "style!css?sourceMap!resolve-url!sass?sourceMap&outputStyle=expanded&" + scssIncludeParams,
       },
       {
         test: /\.css$/,
@@ -94,7 +95,7 @@ var webpackPort = process.env.PORT || 3000;
 gulp.task("webpack:dev", function(callback) {
   // modify some webpack config options
   var devConfig = Object.create(webpackConfig);
-  devConfig.entry.head.unshift('webpack/hot/dev-server');
+  devConfig.entry.styles.unshift('webpack/hot/dev-server');
   devConfig.entry.app.unshift('webpack/hot/dev-server');
   devConfig.entry.app.unshift('webpack-dev-server/client?http://localhost:' + webpackPort);
   devConfig.devtool = "sourcemap";
